@@ -3,8 +3,8 @@ package com.epam.concurrency.menu.action;
 import java.util.Collections;
 import java.util.List;
 
-import com.epam.concurrency.SelectionForm;
 import com.epam.concurrency.comparator.CurrencyComparator;
+import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Account;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.services.AccountService;
@@ -46,6 +46,7 @@ public class ExchangeCurrenciesAction implements IMenuItemAction {
 		currentAccount.setAmount(amount);
 		currentAccount.setCurrency(selectedCurrency);
 		accountService.editAccount(currentAccount);
+		ShowAccountAction.printAccount(currentAccount);
 	}
 
 	public static void printCurrencies(List<Currency> currencies){

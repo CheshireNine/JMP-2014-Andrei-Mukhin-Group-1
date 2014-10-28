@@ -1,6 +1,6 @@
 package com.epam.concurrency.menu.action;
 
-import com.epam.concurrency.SelectionForm;
+import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.services.PersonService;
 import com.epam.concurrency.utils.ConsoleManager;
 

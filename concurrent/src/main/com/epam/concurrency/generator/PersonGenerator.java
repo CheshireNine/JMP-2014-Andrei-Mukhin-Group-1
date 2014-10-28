@@ -1,4 +1,4 @@
-package com.epam.concurrency;
+package com.epam.concurrency.generator;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,7 +17,7 @@ public class PersonGenerator implements Runnable {
 	@Override
 	public void run() {
 		int count = service.getList().size();
-		while(true && !Thread.currentThread().isInterrupted()) {
+		while(!Thread.currentThread().isInterrupted()) {
 			if(count >= 5) {
 				latch.countDown();
 				Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
@@ -31,8 +31,7 @@ public class PersonGenerator implements Runnable {
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Thread.currentThread().interrupt();
 			}
 		}
 

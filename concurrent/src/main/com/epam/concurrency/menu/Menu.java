@@ -45,9 +45,9 @@ public final class Menu extends AbstractMenuItem {
 
 			try {
 				int chosenMenuItemNum = getUserChoice() - 1;
-				isRepeatNeeded = checkMenuType(chosenMenuItemNum);
 				ConsoleManager.clearConsole();
 				subMenus.get(chosenMenuItemNum).execute();
+				isRepeatNeeded = isExitSelected() && checkMenuType(chosenMenuItemNum);
 			} catch (IllegalArgumentException e){
 				ConsoleManager.writeLine("Your choice has to be number from the list");
 			}
@@ -60,7 +60,8 @@ public final class Menu extends AbstractMenuItem {
 		if(MenuItemType.BACK.equals(item.getType())) {
 			return false;
 		} else if(MenuItemType.EXIT.equals(item.getType())) {
-			System.exit(0);
+			setExitSelected(true);
+			return false;
 		}
 
 		return true;

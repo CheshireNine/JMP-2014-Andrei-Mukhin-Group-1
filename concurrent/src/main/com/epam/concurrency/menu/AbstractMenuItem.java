@@ -10,6 +10,7 @@ public abstract class AbstractMenuItem {
 	private IMenuItemAction action;
 	private MenuItemType type;
 	private String name;
+	private boolean isExitSelected = false;
 
 	public AbstractMenuItem(String name) {
 		super();
@@ -72,4 +73,12 @@ public abstract class AbstractMenuItem {
 	public abstract void draw(int num);
 	
 	public abstract void execute() throws IllegalArgumentException;
+
+	public boolean isExitSelected() {
+		return isExitSelected;
+	}
+
+	public void setExitSelected(boolean isExitSelected) {
+		this.isExitSelected = isExitSelected;
+	}
 }
