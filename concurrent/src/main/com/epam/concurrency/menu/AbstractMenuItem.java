@@ -25,6 +25,14 @@ public abstract class AbstractMenuItem {
 		this.action = action;
 	}
 
+	public AbstractMenuItem(String name, IMenuItemAction action,
+			MenuItemType type) {
+		super();
+		this.action = action;
+		this.type = type;
+		this.name = name;
+	}
+
 	public AbstractMenuItem(MenuItemType type) {
 		super();
 		this.type = type;

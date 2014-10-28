@@ -24,6 +24,10 @@ public class MenuItem extends AbstractMenuItem {
 		super(name);
 	}
 
+	public MenuItem(String name, IMenuItemAction action, MenuItemType type) {
+		super(name, action, type);
+	}
+
 	public void draw(int num){
 		ConsoleManager.writeLine(this.getName().isEmpty() ?
 				AbstractMenuItem.separator : " - " + this.getName());

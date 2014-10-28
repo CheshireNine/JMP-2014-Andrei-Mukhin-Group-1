@@ -1,8 +1,10 @@
 package com.epam.concurrency.menu.action;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.SelectionForm;
+import com.epam.concurrency.comparator.CurrencyComparator;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.services.AccountService;
 import com.epam.concurrency.services.CurrencyService;
@@ -22,6 +24,7 @@ public class AddAccountAction implements IMenuItemAction {
 	public void execute() {
 		//TODO validation needed
 		List<Currency> currencies = currencyService.fetchByBankId(form.getBankId());
+		Collections.sort(currencies, new CurrencyComparator());
 		ShowCurrenciesAction.printCurrencies(currencies);
 		int currencyNum = 0;
 
@@ -34,7 +37,7 @@ public class AddAccountAction implements IMenuItemAction {
 			}
 		}
 
-		Currency currency = currencies.get(currencyNum + 1);
+		Currency currency = currencies.get(currencyNum - 1);
 		long amount = 0;
 		while(amount == 0) {
 			try {

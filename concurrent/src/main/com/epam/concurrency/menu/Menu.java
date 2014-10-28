@@ -26,7 +26,11 @@ public final class Menu extends AbstractMenuItem {
 	public Menu(MenuItemType type) {
 		super(type);
 	}
-	
+
+	public Menu(String name, IMenuItemAction action, MenuItemType type) {
+		super(name, action, type);
+	}
+
 	public boolean addItem(AbstractMenuItem item){
 		return subMenus.contains(item) ? false : subMenus.add(item);
 	}

@@ -26,7 +26,6 @@ public class CurrenciesManagement {
 		service.execute(new BankGenerator(latch));
 		service.execute(new PersonGenerator(latch));
 		service.execute(new ClientService(latch));
-		service.shutdown();
 
 	}
 

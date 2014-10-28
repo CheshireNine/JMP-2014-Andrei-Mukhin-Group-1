@@ -7,6 +7,7 @@ import com.epam.concurrency.menu.MenuItemType;
 import com.epam.concurrency.menu.action.AddAccountAction;
 import com.epam.concurrency.menu.action.AddClientAction;
 import com.epam.concurrency.menu.action.AssignPersonAction;
+import com.epam.concurrency.menu.action.ExchangeCurrenciesAction;
 import com.epam.concurrency.menu.action.SelectAccountAction;
 import com.epam.concurrency.menu.action.SelectBankAction;
 import com.epam.concurrency.menu.action.ShowAccountsAction;
@@ -37,14 +38,16 @@ public class MenuManager {
         banks.addItem(accounts);
         Menu selectAccountMenu = new Menu("Select Account", new SelectAccountAction(form));
         Menu addAccountMenu = new Menu("Add Account", new AddAccountAction(form));
-        Menu assignPersonMenu = new Menu("Assign Person", new AssignPersonAction(form));
+        Menu assignPersonMenu = new Menu("Assign Person", new AssignPersonAction(form), MenuItemType.BACK);
         assignPersonMenu.addItem(new MenuItem(MenuItemType.BACK));
         assignPersonMenu.addItem(new MenuItem(MenuItemType.EXIT));
         addAccountMenu.addItem(assignPersonMenu);
         addAccountMenu.addItem(new MenuItem(MenuItemType.BACK));
         addAccountMenu.addItem(new MenuItem(MenuItemType.EXIT));
 
-        Menu exchangeMenu = new Menu("Exchange currency");
+        Menu exchangeMenu = new Menu("Exchange currency", new ExchangeCurrenciesAction(form), MenuItemType.BACK);
+        exchangeMenu.addItem(new MenuItem(MenuItemType.BACK));
+        exchangeMenu.addItem(new MenuItem(MenuItemType.EXIT));
         selectAccountMenu.addItem(assignPersonMenu);
         selectAccountMenu.addItem(exchangeMenu);
         selectAccountMenu.addItem(new MenuItem(MenuItemType.BACK));

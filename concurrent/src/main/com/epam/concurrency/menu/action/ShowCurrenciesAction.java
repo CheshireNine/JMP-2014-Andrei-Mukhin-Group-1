@@ -1,8 +1,10 @@
 package com.epam.concurrency.menu.action;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.SelectionForm;
+import com.epam.concurrency.comparator.CurrencyComparator;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.services.CurrencyService;
 import com.epam.concurrency.utils.ConsoleManager;
@@ -19,6 +21,7 @@ public class ShowCurrenciesAction implements IMenuItemAction {
 	@Override
 	public void execute() {
 		List<Currency> currencies = service.getList();
+		Collections.sort(currencies, new CurrencyComparator());
 		printCurrencies(currencies);
 	}
 

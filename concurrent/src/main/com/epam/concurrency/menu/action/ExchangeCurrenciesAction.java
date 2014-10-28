@@ -1,8 +1,10 @@
 package com.epam.concurrency.menu.action;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.SelectionForm;
+import com.epam.concurrency.comparator.CurrencyComparator;
 import com.epam.concurrency.model.Account;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.services.AccountService;
@@ -15,13 +17,14 @@ public class ExchangeCurrenciesAction implements IMenuItemAction {
 
 	private SelectionForm form;
 
-	public ExchangeCurrenciesAction() {
+	public ExchangeCurrenciesAction(SelectionForm form) {
 		this.form = form;
 	}
 
 	@Override
 	public void execute() {
 		List<Currency> currencies = service.getList();
+		Collections.sort(currencies, new CurrencyComparator());
 		Account currentAccount = accountService.fetchById(form.getAccountId());
 		ShowCurrenciesAction.printCurrencies(currencies);
 		int currencyNum = 0;
