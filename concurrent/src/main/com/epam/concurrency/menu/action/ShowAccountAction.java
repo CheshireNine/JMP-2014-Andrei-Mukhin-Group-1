@@ -24,16 +24,20 @@ public class ShowAccountAction implements IMenuItemAction {
 	public static void printAccount(Account account) {
 		if (account.getAccountId() != 0) {
 			if (account.getOwner() == null) {
+				ConsoleManager.writeLine("#\tID\tOwner\tCurrency\tAmount\tRate");
 				ConsoleManager.writeLine(account.getAccountId()
 						+ "\t" + "<No owner>"
 						+ "\t" + account.getCurrency().getName()
-						+ "\t" + (account.getCurrency().getRate() * account.getAmount()));
+						+ "\t" + (account.getAmount())
+						+ "\t" + account.getCurrency().getRate());
 			} else {
+				ConsoleManager.writeLine("#\tID\tFirst name\tLast Name\tCurrency\tAmount\tRate");
 				ConsoleManager.writeLine(account.getAccountId()
 						+ "\t" + account.getOwner().getFirstName()
 						+ "\t" + account.getOwner().getLastName()
 						+ "\t" + account.getCurrency().getName()
-						+ "\t" + (account.getCurrency().getRate() * account.getAmount()));
+						+ "\t" + account.getAmount()
+						+ "\t" + account.getCurrency().getRate());
 			}
 
 		} else {

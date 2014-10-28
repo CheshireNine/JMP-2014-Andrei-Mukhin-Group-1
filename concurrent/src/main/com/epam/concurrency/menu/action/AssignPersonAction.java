@@ -1,8 +1,10 @@
 package com.epam.concurrency.menu.action;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.SelectionForm;
+import com.epam.concurrency.comparator.PersonComparator;
 import com.epam.concurrency.model.Account;
 import com.epam.concurrency.model.Person;
 import com.epam.concurrency.services.AccountService;
@@ -23,6 +25,7 @@ public class AssignPersonAction implements IMenuItemAction {
 	@Override
 	public void execute() {
 		List<Person> persons = personService.getList();
+		Collections.sort(persons, new PersonComparator());
 		Account account = service.fetchById(form.getAccountId());
 		ShowAccountAction.printAccount(account);
 		ShowPersonsAction.printPersons(persons);
