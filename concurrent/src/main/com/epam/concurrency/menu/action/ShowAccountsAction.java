@@ -3,8 +3,8 @@ package com.epam.concurrency.menu.action;
 import java.util.Collections;
 import java.util.List;
 
-import com.epam.concurrency.SelectionForm;
 import com.epam.concurrency.comparator.AccountComparator;
+import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Account;
 import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.services.AccountService;
@@ -36,7 +36,7 @@ public class ShowAccountsAction implements IMenuItemAction {
 					ConsoleManager.writeLine(number
 							+ "\t" + account.getAccountId()
 							+ "\t" + "<No owner>"
-							+ "\t" + account.getAmount()
+							+ "\t" + (account.getAmount() / account.getCurrency().getPrecision())
 							+ "\t" + account.getCurrency().getName()
 							+ "\t" + account.getCurrency().getRate());
 				} else {
@@ -44,7 +44,7 @@ public class ShowAccountsAction implements IMenuItemAction {
 							+ "\t" + account.getAccountId()
 							+ "\t" + account.getOwner().getFirstName()
 							+ "\t" + account.getOwner().getLastName()
-							+ "\t" + account.getAmount()
+							+ "\t" + (account.getAmount() / account.getCurrency().getPrecision())
 							+ "\t" + account.getCurrency().getName()
 							+ "\t" + account.getCurrency().getRate());
 				}

@@ -1,4 +1,4 @@
-package com.epam.concurrency;
+package com.epam.concurrency.generator;
 
 import java.util.List;
 import java.util.Random;
@@ -24,7 +24,7 @@ public class CurrencyGenerator implements Runnable {
 	public void run() {
 		int count = currencyService.getList().size();
 		Random generator = new Random(RANGE);
-		while(true && !Thread.currentThread().isInterrupted()) {
+		while(!Thread.currentThread().isInterrupted()) {
 
 			if( count >= 5 ) {
 				latch.countDown();
@@ -48,8 +48,7 @@ public class CurrencyGenerator implements Runnable {
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Thread.currentThread().interrupt();
 			}
 		}
 

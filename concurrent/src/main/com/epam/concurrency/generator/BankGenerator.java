@@ -1,4 +1,4 @@
-package com.epam.concurrency;
+package com.epam.concurrency.generator;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;

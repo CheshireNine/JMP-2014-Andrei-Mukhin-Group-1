@@ -1,4 +1,4 @@
-package com.epam.concurrency;
+package com.epam.concurrency.generator;
 
 import java.util.List;
 import java.util.Random;
@@ -31,7 +31,7 @@ public class AccountGenerator implements Runnable {
 
 		int count = accountService.getList().size();
 		Random generator = new Random();
-		while(true && !Thread.currentThread().isInterrupted()) {
+		while(!Thread.currentThread().isInterrupted()) {
 			if(count >= 5) {
 				latch.countDown();
 				Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
@@ -63,8 +63,7 @@ public class AccountGenerator implements Runnable {
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Thread.currentThread().interrupt();
 			}
 		}
 	}

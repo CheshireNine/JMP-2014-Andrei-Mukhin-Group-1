@@ -3,8 +3,8 @@ package com.epam.concurrency.menu.action;
 import java.util.Collections;
 import java.util.List;
 
-import com.epam.concurrency.SelectionForm;
 import com.epam.concurrency.comparator.PersonComparator;
+import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Person;
 import com.epam.concurrency.services.PersonService;
 import com.epam.concurrency.utils.ConsoleManager;

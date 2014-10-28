@@ -1,4 +1,4 @@
-package com.epam.concurrency;
+package com.epam.concurrency.form;
 
 public final class SelectionForm {
 

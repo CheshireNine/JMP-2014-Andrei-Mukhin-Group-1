@@ -3,8 +3,8 @@ package com.epam.concurrency.menu.action;
 import java.util.Collections;
 import java.util.List;
 
-import com.epam.concurrency.SelectionForm;
 import com.epam.concurrency.comparator.CurrencyComparator;
+import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.services.AccountService;
 import com.epam.concurrency.services.CurrencyService;

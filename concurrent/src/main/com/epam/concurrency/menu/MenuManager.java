@@ -1,9 +1,6 @@
-package com.epam.concurrency;
+package com.epam.concurrency.menu;
 
-import com.epam.concurrency.menu.AbstractMenuItem;
-import com.epam.concurrency.menu.Menu;
-import com.epam.concurrency.menu.MenuItem;
-import com.epam.concurrency.menu.MenuItemType;
+import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.menu.action.AddAccountAction;
 import com.epam.concurrency.menu.action.AddClientAction;
 import com.epam.concurrency.menu.action.AssignPersonAction;
