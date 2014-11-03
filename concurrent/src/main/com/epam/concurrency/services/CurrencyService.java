@@ -2,16 +2,15 @@ package com.epam.concurrency.services;
 
 import java.util.List;
 
-import com.epam.concurrency.dao.BankXMLDAO;
+import com.epam.concurrency.dao.IBankDAO;
 import com.epam.concurrency.dao.ICurrencyDAO;
-import com.epam.concurrency.dao.CurrencyXMLDAO;
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.model.Currency;
-import com.epam.concurrency.utils.ModelIdUtil;
 
 public class CurrencyService {
-	private static ICurrencyDAO dao = new CurrencyXMLDAO();
+	private ICurrencyDAO dao;
+	private IBankDAO bankDAO;
 
 	public CurrencyService() {
 		super();
@@ -26,25 +25,21 @@ public class CurrencyService {
 		}
 		return currencies;
 	}
-	public boolean addCurrency(long bankId, String name, float rate, int precision) {
+	public long addCurrency(long bankId, String name, float rate, int precision) {
 		Currency currency = new Currency();
-		BankXMLDAO bankDAO = new BankXMLDAO();
 		Bank bank;
+		long currencyId = 0;
 		try {
 			bank = bankDAO.fetchById(bankId);
-			List<Currency> currencies = dao.getList();
-			long currencyId = ModelIdUtil.getMaxCurrencyId(currencies) + 1;
 			currency.setBank(bank);
-			currency.setCurrencyId(currencyId);
 			currency.setName(name);
 			currency.setRate(rate);
 			currency.setPrecision(precision);
-			dao.save(currency);
+			currencyId = dao.save(currency);
 		} catch (DAOException e1) {
 			e1.printStackTrace();
-			return false;
 		}
-		return true;
+		return currencyId;
 	}
 
 	public List<Currency> fetchByBankId(long id) {
@@ -64,6 +59,14 @@ public class CurrencyService {
 	
 	public boolean deleteCurrency(int currencyId) {
 		return true;
+	}
+
+	public void setDao(ICurrencyDAO dao) {
+		this.dao = dao;
+	}
+
+	public void setBankDAO(IBankDAO bankDAO) {
+		this.bankDAO = bankDAO;
 	}
 
 }

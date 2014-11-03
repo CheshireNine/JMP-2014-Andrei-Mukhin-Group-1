@@ -3,12 +3,11 @@ package com.epam.concurrency.services;
 import java.util.List;
 
 import com.epam.concurrency.dao.IPersonDAO;
-import com.epam.concurrency.dao.PersonXMLDAO;
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Person;
 
 public class PersonService {
-	private static IPersonDAO dao = new PersonXMLDAO();
+	private IPersonDAO dao;
 
 	public PersonService() {
 		super();
@@ -24,17 +23,18 @@ public class PersonService {
 		}
 		return persons;
 	}
-	public boolean addPerson(String firstName, String lastName) {
+	public long addPerson(String firstName, String lastName) {
 		Person person = new Person();
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
+		long personId = 0;
 		try {
-			dao.save(person);
+			personId = dao.save(person);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
+		return personId;
 	}
 	
 	public boolean editPerson(int personId) {
@@ -43,6 +43,10 @@ public class PersonService {
 	
 	public boolean deletePerson(int personId) {
 		return true;
+	}
+
+	public void setDao(IPersonDAO dao) {
+		this.dao = dao;
 	}
 
 }

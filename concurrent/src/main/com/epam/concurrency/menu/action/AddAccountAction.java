@@ -11,12 +11,21 @@ import com.epam.concurrency.services.CurrencyService;
 import com.epam.concurrency.utils.ConsoleManager;
 
 public class AddAccountAction implements IMenuItemAction {
-	private static CurrencyService currencyService = new CurrencyService();
-	private static AccountService accountService = new AccountService();
+	private CurrencyService currencyService;
+	private AccountService accountService;
 
 	private SelectionForm form;
-	
+
+	public AddAccountAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public AddAccountAction(SelectionForm form) {
+		this.form = form;
+	}
+
+	public void setForm(SelectionForm form) {
 		this.form = form;
 	}
 
@@ -52,6 +61,14 @@ public class AddAccountAction implements IMenuItemAction {
 		form.setAccountId(accountId);
 		ShowAccountAction.printAccount(accountService.fetchById(accountId));
 
+	}
+
+	public void setCurrencyService(CurrencyService currencyService) {
+		this.currencyService = currencyService;
+	}
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
 	}
 
 }

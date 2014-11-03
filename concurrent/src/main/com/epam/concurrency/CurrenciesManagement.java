@@ -8,6 +8,9 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.epam.concurrency.generator.AccountGenerator;
 import com.epam.concurrency.generator.BankGenerator;
 import com.epam.concurrency.generator.CurrencyGenerator;
@@ -25,17 +28,17 @@ public class CurrenciesManagement {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		CountDownLatch latch = new CountDownLatch(4);
 
 		ExecutorService service = Executors.newFixedThreadPool(5);
 		CyclicBarrier barrier = new CyclicBarrier(1, new ThreadsInterruptionService(service));
 
-		service.execute(new AccountGenerator(latch));
-		service.execute(new CurrencyGenerator(latch));
-		service.execute(new BankGenerator(latch));
-		service.execute(new PersonGenerator(latch));
-		service.execute(new ClientService(latch, barrier));
-
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"applicationContext.xml");
+		service.execute((AccountGenerator)context.getBean("accountGenerator"));
+		service.execute((CurrencyGenerator)context.getBean("currencyGenerator"));
+		service.execute((BankGenerator)context.getBean("bankGenerator"));
+		service.execute((PersonGenerator)context.getBean("personGenerator"));
+		service.execute(new ClientService((CountDownLatch)context.getBean("latch"), barrier));
 	}
 
 }

@@ -4,24 +4,20 @@ import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.comparator.BankComparator;
-import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.services.BankService;
 import com.epam.concurrency.utils.ConsoleManager;
 
 
 public class ShowBanksAction implements IMenuItemAction {
-	private static BankService service = new BankService();
-
-	private SelectionForm form;
+	private BankService bankService;
 
 	public ShowBanksAction() {
-		this.form = form;
 	}
 
 	@Override
 	public void execute() {
-		List<Bank> banks = service.getList();
+		List<Bank> banks = bankService.getList();
 		Collections.sort(banks, new BankComparator());
 		printBanks(banks);
 	}
@@ -38,6 +34,10 @@ public class ShowBanksAction implements IMenuItemAction {
 		} else {
 			ConsoleManager.writeLine("<Empty bank list>");
 		}
+	}
+
+	public void setBankService(BankService bankService) {
+		this.bankService = bankService;
 	}
 
 }

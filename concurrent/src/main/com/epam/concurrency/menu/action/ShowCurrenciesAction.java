@@ -4,23 +4,19 @@ import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.comparator.CurrencyComparator;
-import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.services.CurrencyService;
 import com.epam.concurrency.utils.ConsoleManager;
 
 public class ShowCurrenciesAction implements IMenuItemAction {
-	private static CurrencyService service = new CurrencyService();
-
-	private SelectionForm form;
+	private CurrencyService currencyService;
 
 	public ShowCurrenciesAction() {
-		this.form = form;
 	}
 
 	@Override
 	public void execute() {
-		List<Currency> currencies = service.getList();
+		List<Currency> currencies = currencyService.getList();
 		Collections.sort(currencies, new CurrencyComparator());
 		printCurrencies(currencies);
 	}
@@ -40,6 +36,10 @@ public class ShowCurrenciesAction implements IMenuItemAction {
 		} else {
 			ConsoleManager.writeLine("<Empty currency list>");
 		}
+	}
+
+	public void setCurrencyService(CurrencyService currencyService) {
+		this.currencyService = currencyService;
 	}
 
 }

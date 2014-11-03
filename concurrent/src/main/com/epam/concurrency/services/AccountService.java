@@ -3,13 +3,12 @@ package com.epam.concurrency.services;
 import java.util.List;
 
 import com.epam.concurrency.dao.IAccountDAO;
-import com.epam.concurrency.dao.AccountXMLDAO;
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Account;
 import com.epam.concurrency.model.Currency;
 
 public class AccountService {
-	private static IAccountDAO dao = new AccountXMLDAO();
+	private IAccountDAO dao;
 
 	public AccountService() {
 		super();
@@ -25,13 +24,14 @@ public class AccountService {
 		}
 		return accounts;
 	}
+
 	public long addAccount(Currency currency, long amount) {
 		Account account = new Account();
 		account.setCurrency(currency);
 		account.setAmount(amount);
 		long accountId = 0;
 		try {
-			return dao.save(account);
+			accountId = dao.save(account);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,12 +59,18 @@ public class AccountService {
 		return false;
 	}
 
-	public boolean editAccount(int accountId) {
-		return true;
-	}
-	
 	public boolean deleteAccount(int accountId) {
-		return true;
+		try {
+			return dao.remove(accountId);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public void setDao(IAccountDAO dao) {
+		this.dao = dao;
 	}
 
 }

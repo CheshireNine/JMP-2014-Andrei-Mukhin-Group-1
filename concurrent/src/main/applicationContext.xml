@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!-- Load in application properties reference -->
+	<bean id="applicationProperties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:resources/configuration.properties" />
+	</bean>
+
+	<bean id="accountFile" class="java.io.File" scope="singleton">
+		<constructor-arg type="java.lang.String" value="${xml.account.path}"/>
+	</bean>
+
+	<bean id="accountFileManager" class="com.epam.concurrency.utils.JAXBFileManager" scope="singleton">
+		<property name="sourceFile">
+			<ref bean="accountFile"/>
+		</property>
+	</bean>
+
+	<bean id="accountXMLDAO" class="com.epam.concurrency.dao.AccountXMLDAO" scope="singleton">
+		<property name="fileManager">
+			<ref bean="accountFileManager"/>
+		</property>
+	</bean>
+
+	<bean id="accountService" class="com.epam.concurrency.services.AccountService" scope="singleton">
+		<property name="dao">
+			<ref bean="accountXMLDAO"/>
+		</property>
+	</bean>
+
+		<bean id="personFile" class="java.io.File" scope="singleton">
+		<constructor-arg type="java.lang.String" value="${xml.person.path}"/>
+	</bean>
+
+	<bean id="personFileManager" class="com.epam.concurrency.utils.JAXBFileManager" scope="singleton">
+		<property name="sourceFile">
+			<ref bean="personFile"/>
+		</property>
+	</bean>
+
+	<bean id="personXMLDAO" class="com.epam.concurrency.dao.PersonXMLDAO" scope="singleton">
+		<property name="fileManager">
+			<ref bean="personFileManager"/>
+		</property>
+	</bean>
+
+	<bean id="personService" class="com.epam.concurrency.services.PersonService" scope="singleton">
+		<property name="dao">
+			<ref bean="personXMLDAO"/>
+		</property>
+	</bean>
+
+	<bean id="currencyFile" class="java.io.File" scope="singleton">
+		<constructor-arg type="java.lang.String" value="${xml.currency.path}"/>
+	</bean>
+
+	<bean id="currencyFileManager" class="com.epam.concurrency.utils.JAXBFileManager" scope="singleton">
+		<property name="sourceFile" ref="currencyFile"/>
+	</bean>
+
+	<bean id="currencyXMLDAO" class="com.epam.concurrency.dao.CurrencyXMLDAO" scope="singleton">
+		<property name="fileManager" ref="currencyFileManager"/>
+	</bean>
+
+	<bean id="currencyService" class="com.epam.concurrency.services.CurrencyService" scope="singleton">
+		<property name="dao" ref="currencyXMLDAO"/>
+		<property name="bankDAO" ref="bankXMLDAO"/>
+	</bean>
+
+	<bean id="bankFile" class="java.io.File" scope="singleton">
+		<constructor-arg type="java.lang.String" value="${xml.bank.path}"/>
+	</bean>
+
+	<bean id="bankFileManager" class="com.epam.concurrency.utils.JAXBFileManager" scope="singleton">
+		<property name="sourceFile" ref="bankFile"/>
+	</bean>
+
+	<bean id="bankXMLDAO" class="com.epam.concurrency.dao.BankXMLDAO" scope="singleton">
+		<property name="fileManager" ref="bankFileManager"/>
+	</bean>
+
+	<bean id="bankService" class="com.epam.concurrency.services.BankService" scope="singleton">
+		<property name="dao" ref="bankXMLDAO"/>
+	</bean>
+
+	<bean id="form" class="com.epam.concurrency.form.SelectionForm" scope="singleton"/>
+	<!-- Actions -->
+	<bean id="addAccountAction" class="com.epam.concurrency.menu.action.AddAccountAction" scope="singleton" autowire="byType"/>
+	<bean id="addClientAction" class="com.epam.concurrency.menu.action.AddClientAction" scope="singleton" autowire="byType"/>
+	<bean id="assignPersonAction" class="com.epam.concurrency.menu.action.AssignPersonAction" scope="singleton" autowire="byType"/>
+	<bean id="exchangeCurrenciesAction" class="com.epam.concurrency.menu.action.ExchangeCurrenciesAction" scope="singleton" autowire="byType"/>
+	<bean id="selectAccountAction" class="com.epam.concurrency.menu.action.SelectAccountAction" scope="singleton" autowire="byType"/>
+	<bean id="selectBankAction" class="com.epam.concurrency.menu.action.SelectBankAction" scope="singleton" autowire="byType"/>
+	<bean id="showAccountAction" class="com.epam.concurrency.menu.action.ShowAccountAction" scope="singleton" autowire="byType"/>
+	<bean id="showAccountsAction" class="com.epam.concurrency.menu.action.ShowAccountsAction" scope="singleton" autowire="byType"/>
+	<bean id="showBanksAction" class="com.epam.concurrency.menu.action.ShowBanksAction" scope="singleton" autowire="byType"/>
+	<bean id="showCurrenciesAction" class="com.epam.concurrency.menu.action.ShowCurrenciesAction" scope="singleton" autowire="byType"/>
+	<bean id="showPersonsAction" class="com.epam.concurrency.menu.action.ShowPersonsAction" scope="singleton" autowire="byType"/>
+
+	<bean id="latch" class="java.util.concurrent.CountDownLatch" scope="singleton">
+		<constructor-arg type="int" value="4"/>
+	</bean>
+	<bean id="currencyGenerator" class="com.epam.concurrency.generator.CurrencyGenerator" scope="singleton" autowire="byType">
+		<constructor-arg type="java.util.concurrent.CountDownLatch" ref="latch"/>
+		<property name="currencyService" ref="currencyService"/>
+		<property name="bankService" ref="bankService"/>
+	</bean>
+	<bean id="bankGenerator" class="com.epam.concurrency.generator.BankGenerator" scope="singleton" autowire="byType">
+		<constructor-arg type="java.util.concurrent.CountDownLatch" ref="latch"/>
+		<property name="service" ref="bankService"/>
+	</bean>
+	<bean id="accountGenerator" class="com.epam.concurrency.generator.AccountGenerator" scope="singleton" autowire="byType">
+		<constructor-arg type="java.util.concurrent.CountDownLatch" ref="latch"/>
+		<property name="accountService" ref="accountService"/>
+		<property name="bankService" ref="bankService"/>
+		<property name="currencyService" ref="currencyService"/>
+		<property name="personService" ref="personService"/>
+	</bean>
+	<bean id="personGenerator" class="com.epam.concurrency.generator.PersonGenerator" scope="singleton" autowire="byType">
+		<constructor-arg type="java.util.concurrent.CountDownLatch" ref="latch"/>
+		<property name="service" ref="personService"/>
+	</bean>
+</beans>
