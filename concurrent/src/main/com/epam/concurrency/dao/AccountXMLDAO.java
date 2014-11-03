@@ -3,7 +3,6 @@
  */
 package com.epam.concurrency.dao;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +10,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.xml.bind.JAXBException;
+
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Account;
 import com.epam.concurrency.model.jaxb.Accounts;
-import com.epam.concurrency.utils.ConfigurationManager;
-import com.epam.concurrency.utils.JAXBSerializationHelper;
+import com.epam.concurrency.utils.JAXBFileManager;
 import com.epam.concurrency.utils.ModelIdUtil;
 
 
@@ -23,19 +22,22 @@ import com.epam.concurrency.utils.ModelIdUtil;
  * @author I7eter
  *
  */
-public final class AccountXMLDAO implements IAccountDAO {
+public class AccountXMLDAO implements IAccountDAO {
 
 	/**
 	 * 
 	 */
-	private static File accountFile = new File(
-			ConfigurationManager.getProperty(ConfigurationManager.XML_ACCOUNT_PATH));
-
+	private JAXBFileManager fileManager;
 	private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 	private final Lock readLock = rwl.readLock();
 	private final Lock writeLock = rwl.writeLock();
 
 	public AccountXMLDAO() {
+	}
+	
+
+	public void setFileManager(JAXBFileManager fileManager) {
+		this.fileManager = fileManager;
 	}
 
 	/* (non-Javadoc)
@@ -65,7 +67,7 @@ public final class AccountXMLDAO implements IAccountDAO {
 			List<Account> storedAccounts = getList();
 			long curAccountId = ModelIdUtil.getMaxAccountId(storedAccounts) + 1;
 			/** obtain new accountId */
-			account.setAccountId( curAccountId + 1);
+			account.setAccountId( curAccountId);
 			/** add to existed collection of accounts */
 			storedAccounts.add(account);
 			marshal(storedAccounts);
@@ -136,21 +138,6 @@ public final class AccountXMLDAO implements IAccountDAO {
 		return new Account();
 	}
 
-	public static void marshal(List<Account> accounts)
-			throws IOException, JAXBException {
-		JAXBSerializationHelper.marshal(new Accounts(accounts), Accounts.class, accountFile);
-	}
-
-	public static List<Account> unmarshal() throws JAXBException {
-		if(accountFile.exists() && (accountFile.length() > 0)) {
-			 Accounts accounts = ((Accounts) JAXBSerializationHelper
-					 .unmarshal(Accounts.class, accountFile));
-			return accounts.getAccounts();
-		}
-
-		return new ArrayList<Account>();
-	}
-
 	@Override
 	public boolean edit(Account currentAccount) throws DAOException {
 		writeLock.lock();
@@ -177,4 +164,14 @@ public final class AccountXMLDAO implements IAccountDAO {
 		return false;
 	}
 
+	private void marshal(List<Account> accounts)
+			throws IOException, JAXBException {
+		fileManager.marshal(new Accounts(accounts), Accounts.class);
+	}
+
+	private List<Account> unmarshal() throws JAXBException {	
+		Accounts accounts = ((Accounts) fileManager
+			 .unmarshal(Accounts.class));
+		return accounts.getAccounts();
+	}
 }

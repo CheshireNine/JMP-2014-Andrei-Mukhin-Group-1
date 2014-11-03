@@ -11,17 +11,26 @@ import com.epam.concurrency.utils.ConsoleManager;
 
 
 public class SelectBankAction implements IMenuItemAction {
-	private static BankService service = new BankService();
+	private BankService bankService;
 
 	private SelectionForm form;
+
+	public SelectBankAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public SelectBankAction(SelectionForm form) {
 		this.form = form;
 	}
 
+	public void setForm(SelectionForm form) {
+		this.form = form;
+	}
+
 	@Override
 	public void execute() {
-		List<Bank> banks = service.getList();
+		List<Bank> banks = bankService.getList();
 		Collections.sort(banks, new BankComparator());
 		ShowBanksAction.printBanks(banks);
 		
@@ -36,6 +45,10 @@ public class SelectBankAction implements IMenuItemAction {
 		}
 		
 		form.setBankId(banks.get(banknum - 1).getBankId());
+	}
+
+	public void setBankService(BankService bankService) {
+		this.bankService = bankService;
 	}
 
 

@@ -6,12 +6,16 @@ import com.epam.concurrency.services.PersonService;
 
 public class PersonGenerator implements Runnable {
 	
-	private static final PersonService service = new PersonService();
+	private PersonService service;
 
 	private final CountDownLatch latch;
 
 	public PersonGenerator(CountDownLatch latch) {
 		this.latch = latch;
+	}
+
+	public void setService(PersonService service) {
+		this.service = service;
 	}
 
 	@Override
@@ -24,7 +28,7 @@ public class PersonGenerator implements Runnable {
 			}
 			String firstName = "FirstName" + count;
 			String lastName = "LastName" + count;
-			if(service.addPerson(firstName, lastName)) {
+			if(service.addPerson(firstName, lastName) != 0) {
 				count++;
 			}
 

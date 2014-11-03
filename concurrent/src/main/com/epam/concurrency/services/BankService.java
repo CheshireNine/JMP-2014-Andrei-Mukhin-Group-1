@@ -3,12 +3,11 @@ package com.epam.concurrency.services;
 import java.util.List;
 
 import com.epam.concurrency.dao.IBankDAO;
-import com.epam.concurrency.dao.BankXMLDAO;
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Bank;
 
 public class BankService {
-	private static IBankDAO dao = new BankXMLDAO();
+	private IBankDAO dao;
 
 	public BankService() {
 		super();
@@ -24,16 +23,17 @@ public class BankService {
 		}
 		return banks;
 	}
-	public boolean addBank(String name) {
+	public long addBank(String name) {
 		Bank bank = new Bank();
 		bank.setName(name);
+		long bankId = 0;
 		try {
-			dao.save(bank);
+			bankId = dao.save(bank);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
+		return bankId;
 	}
 
 	public boolean editBank(int bankId) {
@@ -42,6 +42,10 @@ public class BankService {
 	
 	public boolean deleteBank(int bankId) {
 		return true;
+	}
+
+	public void setDao(IBankDAO dao) {
+		this.dao = dao;
 	}
 
 }

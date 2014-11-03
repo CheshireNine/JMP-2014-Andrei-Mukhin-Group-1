@@ -1,4 +1,4 @@
-/**
+  /**
  * 
  */
 package com.epam.concurrency.utils;
@@ -16,20 +16,25 @@ import javax.xml.bind.Unmarshaller;
  * @author Petr_Tsiatnev
  *
  */
-public final class JAXBSerializationHelper {
+public class JAXBFileManager {
 
+	private File sourceFile;
 	/**
 	 * 
 	 */
-	private JAXBSerializationHelper() {
+	public JAXBFileManager() {
 		super();
 	}
 
-	public static void marshal(Object list, Class clazz, File file)
+	public void setSourceFile(File sourceFile) {
+		this.sourceFile = sourceFile;
+	}
+
+	public void marshal(Object list, Class clazz)
 			throws IOException, JAXBException {
-		if(!file.exists()) {
+		if(!sourceFile.exists()) {
 			try {
-				file.createNewFile();
+				sourceFile.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -38,17 +43,17 @@ public final class JAXBSerializationHelper {
 		JAXBContext context = JAXBContext.newInstance(clazz);
 		Marshaller m = context.createMarshaller();
 		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		FileOutputStream stream = FileManager.getFileOutputStream(file);
+		FileOutputStream stream = FileManager.getFileOutputStream(sourceFile);
 		m.marshal(list, stream);
 		stream.close();
-		
+
 	}
 
-	public static Object unmarshal(Class clazz, File file) throws JAXBException {
-		if(file.length() != 0L) {
+	public Object unmarshal(Class clazz) throws JAXBException {
+		if(sourceFile.exists() && (sourceFile.length() > 0)) {
 			JAXBContext context = JAXBContext.newInstance(clazz);
 			Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
-			return (Object) jaxbUnmarshaller.unmarshal(file);
+			return (Object) jaxbUnmarshaller.unmarshal(sourceFile);
 		}
 		return null;
 	}

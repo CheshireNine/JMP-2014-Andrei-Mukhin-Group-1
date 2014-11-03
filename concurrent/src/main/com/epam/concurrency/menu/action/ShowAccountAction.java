@@ -6,17 +6,26 @@ import com.epam.concurrency.services.AccountService;
 import com.epam.concurrency.utils.ConsoleManager;
 
 public class ShowAccountAction implements IMenuItemAction {
-	private static AccountService service = new AccountService();
+	private AccountService accountService;
 
 	private SelectionForm form;
+
+	public ShowAccountAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public ShowAccountAction(SelectionForm form) {
 		this.form = form;
 	}
 
+	public void setForm(SelectionForm form) {
+		this.form = form;
+	}
+
 	@Override
 	public void execute() {
-		Account account = service.fetchById(form.getAccountId());
+		Account account = accountService.fetchById(form.getAccountId());
 		printAccount(account);
 		
 	}
@@ -28,7 +37,7 @@ public class ShowAccountAction implements IMenuItemAction {
 				ConsoleManager.writeLine(account.getAccountId()
 						+ "\t" + "<No owner>"
 						+ "\t" + account.getCurrency().getName()
-						+ "\t" + (account.getAmount() / account.getCurrency().getPrecision())
+						+ "\t" + (account.getAmount() )
 						+ "\t" + account.getCurrency().getRate());
 			} else {
 				ConsoleManager.writeLine("ID\tFirst name\tLast Name\tCurrency\tAmount\tRate");
@@ -36,13 +45,17 @@ public class ShowAccountAction implements IMenuItemAction {
 						+ "\t" + account.getOwner().getFirstName()
 						+ "\t" + account.getOwner().getLastName()
 						+ "\t" + account.getCurrency().getName()
-						+ "\t" + (account.getAmount() / account.getCurrency().getPrecision())
+						+ "\t" + (account.getAmount())
 						+ "\t" + account.getCurrency().getRate());
 			}
 
 		} else {
 			ConsoleManager.writeLine("<Empty account>");
 		}
+	}
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
 	}
 
 }

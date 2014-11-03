@@ -7,11 +7,15 @@ import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.services.BankService;
 
 public class BankGenerator implements Runnable {
-	private static final BankService service = new BankService();
+	private BankService service;
 	private final CountDownLatch latch;
 
 	public BankGenerator(CountDownLatch latch) {
 		this.latch = latch;
+	}
+
+	public void setService(BankService service) {
+		this.service = service;
 	}
 
 	@Override

@@ -11,13 +11,22 @@ import com.epam.concurrency.services.CurrencyService;
 public class CurrencyGenerator implements Runnable {
 
 	private final CountDownLatch latch;
-	private static final CurrencyService currencyService = new CurrencyService();
-	private static final BankService bankService = new BankService();
 	private static final int DIGITS_NUM = 5;
 	private static final int RANGE = 5;
 
+	private CurrencyService currencyService;
+	private BankService bankService;
+
 	public CurrencyGenerator(CountDownLatch latch) {
 		this.latch = latch;
+	}
+
+	public void setCurrencyService(CurrencyService currencyService) {
+		this.currencyService = currencyService;
+	}
+
+	public void setBankService(BankService bankService) {
+		this.bankService = bankService;
 	}
 
 	@Override
@@ -39,7 +48,7 @@ public class CurrencyGenerator implements Runnable {
 				rate = rate < 0 ? rate*(-1) : rate;
 				int precision = generator.nextInt(DIGITS_NUM);
 				
-				if(currencyService.addCurrency(bankId, name, rate, precision)) {
+				if(currencyService.addCurrency(bankId, name, rate, precision) != 0) {
 					count++;
 				}
 				

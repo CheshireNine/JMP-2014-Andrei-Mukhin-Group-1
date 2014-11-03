@@ -3,7 +3,6 @@
  */
 package com.epam.concurrency.dao;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,7 @@ import javax.xml.bind.JAXBException;
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Currency;
 import com.epam.concurrency.model.jaxb.Currencies;
-import com.epam.concurrency.utils.ConfigurationManager;
-import com.epam.concurrency.utils.JAXBSerializationHelper;
+import com.epam.concurrency.utils.JAXBFileManager;
 import com.epam.concurrency.utils.ModelIdUtil;
 
 
@@ -24,13 +22,12 @@ import com.epam.concurrency.utils.ModelIdUtil;
  * @author I7eter
  *
  */
-public final class CurrencyXMLDAO implements ICurrencyDAO {
+public class CurrencyXMLDAO implements ICurrencyDAO {
 
 	/**
 	 * 
 	 */
-	private static File currencyFile = new File(
-			ConfigurationManager.getProperty(ConfigurationManager.XML_CURRENCY_PATH));
+	private JAXBFileManager fileManager;
 
 	private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 	private final Lock readLock = rwl.readLock();
@@ -125,18 +122,19 @@ public final class CurrencyXMLDAO implements ICurrencyDAO {
 		return fetchedCurrencies;
 	}
 
-	public static void marshal(List<Currency> currencies)
+	private void marshal(List<Currency> currencies)
 			throws IOException, JAXBException {
-		JAXBSerializationHelper.marshal(new Currencies(currencies), Currencies.class, currencyFile);
+		fileManager.marshal(new Currencies(currencies), Currencies.class);
 	}
 
-	public static List<Currency> unmarshal() throws JAXBException {
-		if(currencyFile.exists() && (currencyFile.length() > 0)) {
-			Currencies currencies = ((Currencies) JAXBSerializationHelper
-					.unmarshal(Currencies.class, currencyFile));
-			return currencies.getCurrencies();
-		}
+	private List<Currency> unmarshal() throws JAXBException {
 
-		return new ArrayList<Currency>();
+		Currencies currencies = ((Currencies) fileManager
+				.unmarshal(Currencies.class));
+		return currencies.getCurrencies();
+	}
+
+	public void setFileManager(JAXBFileManager fileManager) {
+		this.fileManager = fileManager;
 	}
 }

@@ -13,10 +13,20 @@ import com.epam.concurrency.utils.ConsoleManager;
 
 
 public class AssignPersonAction implements IMenuItemAction {
-	private static AccountService service = new AccountService();
-	private static PersonService personService = new PersonService();
+	private AccountService accountService;
+	private PersonService personService;
 
 	private SelectionForm form;
+
+	public AssignPersonAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setForm(SelectionForm form) {
+		this.form = form;
+	}
+
 
 	public AssignPersonAction(SelectionForm form) {
 		this.form = form;
@@ -26,7 +36,7 @@ public class AssignPersonAction implements IMenuItemAction {
 	public void execute() {
 		List<Person> persons = personService.getList();
 		Collections.sort(persons, new PersonComparator());
-		Account account = service.fetchById(form.getAccountId());
+		Account account = accountService.fetchById(form.getAccountId());
 		ShowAccountAction.printAccount(account);
 		ShowPersonsAction.printPersons(persons);
 		
@@ -41,7 +51,15 @@ public class AssignPersonAction implements IMenuItemAction {
 		}
 
 		account.setOwner(persons.get(personNum - 1));
-		service.editAccount(account);
+		accountService.editAccount(account);
+	}
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
+	}
+
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
 	}
 
 

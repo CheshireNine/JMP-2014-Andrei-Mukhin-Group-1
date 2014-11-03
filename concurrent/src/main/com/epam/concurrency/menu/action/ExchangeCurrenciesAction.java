@@ -12,18 +12,27 @@ import com.epam.concurrency.services.CurrencyService;
 import com.epam.concurrency.utils.ConsoleManager;
 
 public class ExchangeCurrenciesAction implements IMenuItemAction {
-	private static CurrencyService service = new CurrencyService();
-	private static AccountService accountService = new AccountService();
+	private CurrencyService currencyService;
+	private AccountService accountService;
 
 	private SelectionForm form;
+
+	public ExchangeCurrenciesAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public ExchangeCurrenciesAction(SelectionForm form) {
 		this.form = form;
 	}
 
+	public void setForm(SelectionForm form) {
+		this.form = form;
+	}
+
 	@Override
 	public void execute() {
-		List<Currency> currencies = service.getList();
+		List<Currency> currencies = currencyService.getList();
 		Collections.sort(currencies, new CurrencyComparator());
 		Account currentAccount = accountService.fetchById(form.getAccountId());
 		ShowCurrenciesAction.printCurrencies(currencies);
@@ -63,6 +72,14 @@ public class ExchangeCurrenciesAction implements IMenuItemAction {
 		} else {
 			ConsoleManager.writeLine("<Empty currency list>");
 		}
+	}
+
+	public void setCurrencyService(CurrencyService currencyService) {
+		this.currencyService = currencyService;
+	}
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
 	}
 
 }

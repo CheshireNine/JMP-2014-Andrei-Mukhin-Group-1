@@ -4,24 +4,19 @@ import java.util.Collections;
 import java.util.List;
 
 import com.epam.concurrency.comparator.AccountComparator;
-import com.epam.concurrency.form.SelectionForm;
 import com.epam.concurrency.model.Account;
-import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.services.AccountService;
 import com.epam.concurrency.utils.ConsoleManager;
 
 public class ShowAccountsAction implements IMenuItemAction {
-	private static AccountService service = new AccountService();
+	private AccountService accountService;
 
-	private SelectionForm form;
-
-	public ShowAccountsAction(SelectionForm form) {
-		this.form = form;
+	public ShowAccountsAction() {
 	}
 
 	@Override
 	public void execute() {
-		List<Account> accounts = service.getList();
+		List<Account> accounts = accountService.getList();
 		Collections.sort(accounts, new AccountComparator());
 		printAccounts(accounts);
 	}
@@ -36,7 +31,7 @@ public class ShowAccountsAction implements IMenuItemAction {
 					ConsoleManager.writeLine(number
 							+ "\t" + account.getAccountId()
 							+ "\t" + "<No owner>"
-							+ "\t" + (account.getAmount() / account.getCurrency().getPrecision())
+							+ "\t" + (account.getAmount() )
 							+ "\t" + account.getCurrency().getName()
 							+ "\t" + account.getCurrency().getRate());
 				} else {
@@ -44,7 +39,7 @@ public class ShowAccountsAction implements IMenuItemAction {
 							+ "\t" + account.getAccountId()
 							+ "\t" + account.getOwner().getFirstName()
 							+ "\t" + account.getOwner().getLastName()
-							+ "\t" + (account.getAmount() / account.getCurrency().getPrecision())
+							+ "\t" + (account.getAmount() )
 							+ "\t" + account.getCurrency().getName()
 							+ "\t" + account.getCurrency().getRate());
 				}
@@ -53,6 +48,10 @@ public class ShowAccountsAction implements IMenuItemAction {
 		} else {
 			ConsoleManager.writeLine("<Empty account list>");
 		}
+	}
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
 	}
 
 }

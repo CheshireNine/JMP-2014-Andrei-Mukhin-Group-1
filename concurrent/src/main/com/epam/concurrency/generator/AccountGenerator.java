@@ -14,16 +14,33 @@ import com.epam.concurrency.services.CurrencyService;
 import com.epam.concurrency.services.PersonService;
 
 public class AccountGenerator implements Runnable {
-	private static final CurrencyService currencyService = new CurrencyService();
-	private static final AccountService accountService = new AccountService();
-	private static final BankService bankService = new BankService();
-	private static final PersonService personService = new PersonService();
 	private static final int AMOUNT_RANGE = 100000;
+
+	private CurrencyService currencyService;
+	private AccountService accountService;
+	private BankService bankService;
+	private PersonService personService;
 	
 	private final CountDownLatch latch;
 
 	public AccountGenerator(CountDownLatch latch) {
 		this.latch = latch;
+	}
+
+	public void setCurrencyService(CurrencyService currencyService) {
+		this.currencyService = currencyService;
+	}
+
+	public void setAccountService(AccountService accountService) {
+		this.accountService = accountService;
+	}
+
+	public void setBankService(BankService bankService) {
+		this.bankService = bankService;
+	}
+
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
 	}
 
 	@Override

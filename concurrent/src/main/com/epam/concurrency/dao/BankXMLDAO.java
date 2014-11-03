@@ -3,7 +3,6 @@
  */
 package com.epam.concurrency.dao;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,7 @@ import javax.xml.bind.JAXBException;
 import com.epam.concurrency.exceptions.DAOException;
 import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.model.jaxb.Banks;
-import com.epam.concurrency.utils.ConfigurationManager;
-import com.epam.concurrency.utils.JAXBSerializationHelper;
+import com.epam.concurrency.utils.JAXBFileManager;
 import com.epam.concurrency.utils.ModelIdUtil;
 
 
@@ -24,19 +22,22 @@ import com.epam.concurrency.utils.ModelIdUtil;
  * @author I7eter
  *
  */
-public final class BankXMLDAO implements IBankDAO {
+public class BankXMLDAO implements IBankDAO {
 
 	/**
 	 * 
 	 */
-	private static File bankFile = new File(
-			ConfigurationManager.getProperty(ConfigurationManager.XML_BANK_PATH));
+	private JAXBFileManager fileManager;
 
 	private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 	private final Lock readLock = rwl.readLock();
 	private final Lock writeLock = rwl.writeLock();
 
 	public BankXMLDAO() {
+	}
+
+	public void setFileManager(JAXBFileManager fileManager) {
+		this.fileManager = fileManager;
 	}
 
 	/* (non-Javadoc)
@@ -69,7 +70,7 @@ public final class BankXMLDAO implements IBankDAO {
 			curBankId = ModelIdUtil.getMaxBankId(storedBanks) + 1;
 		}
 		/** obtain new bankId */
-		bank.setBankId( curBankId + 1);
+		bank.setBankId(curBankId);
 		/** add to existed collection of banks */
 		storedBanks.add(bank);
 
@@ -124,14 +125,14 @@ public final class BankXMLDAO implements IBankDAO {
 		return new Bank();
 	}
 
-	public static void marshal(List<Bank> banks)
+	private void marshal(List<Bank> banks)
 			throws IOException, JAXBException {
-		JAXBSerializationHelper.marshal(new Banks(banks), Banks.class, bankFile);
+		fileManager.marshal(new Banks(banks), Banks.class);
 	}
 
-	public static List<Bank> unmarshal() throws JAXBException {
-		Banks banks = ((Banks) JAXBSerializationHelper
-				.unmarshal(Banks.class, bankFile));
+	private List<Bank> unmarshal() throws JAXBException {
+		Banks banks = ((Banks) fileManager
+				.unmarshal(Banks.class));
 
 		return (banks == null) ? new ArrayList<Bank>() : banks.getBanks();
 	}
