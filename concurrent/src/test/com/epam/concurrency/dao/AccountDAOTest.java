@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.com.epam.concurrency.dao;
+package com.epam.concurrency.dao;
 
 import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;

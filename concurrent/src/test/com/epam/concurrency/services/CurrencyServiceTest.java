@@ -1,4 +1,4 @@
-package test.com.epam.concurrency.services;
+package com.epam.concurrency.services;
 
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;

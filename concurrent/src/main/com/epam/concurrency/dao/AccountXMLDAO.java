@@ -172,6 +172,6 @@ public class AccountXMLDAO implements IAccountDAO {
 	private List<Account> unmarshal() throws JAXBException {	
 		Accounts accounts = ((Accounts) fileManager
 			 .unmarshal(Accounts.class));
-		return accounts.getAccounts();
+		return (accounts == null) ? new ArrayList<Account>() : accounts.getAccounts();
 	}
 }

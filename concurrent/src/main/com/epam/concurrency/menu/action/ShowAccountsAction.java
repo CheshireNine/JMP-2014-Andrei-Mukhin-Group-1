@@ -31,7 +31,7 @@ public class ShowAccountsAction implements IMenuItemAction {
 					ConsoleManager.writeLine(number
 							+ "\t" + account.getAccountId()
 							+ "\t" + "<No owner>"
-							+ "\t" + (account.getAmount() )
+							+ "\t" + (account.getAmount() / 10^account.getCurrency().getPrecision())
 							+ "\t" + account.getCurrency().getName()
 							+ "\t" + account.getCurrency().getRate());
 				} else {
@@ -39,7 +39,7 @@ public class ShowAccountsAction implements IMenuItemAction {
 							+ "\t" + account.getAccountId()
 							+ "\t" + account.getOwner().getFirstName()
 							+ "\t" + account.getOwner().getLastName()
-							+ "\t" + (account.getAmount() )
+							+ "\t" + (account.getAmount() / 10^account.getCurrency().getPrecision())
 							+ "\t" + account.getCurrency().getName()
 							+ "\t" + account.getCurrency().getRate());
 				}
