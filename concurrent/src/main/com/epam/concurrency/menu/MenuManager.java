@@ -65,6 +65,7 @@ public class MenuManager {
         currencies.addItem(new MenuItem(MenuItemType.BACK));
         currencies.addItem(new MenuItem(MenuItemType.EXIT));
 
+        banks.addItem(new MenuItem(MenuItemType.BACK));
         banks.addItem(new MenuItem(MenuItemType.EXIT));
         root.addItem(new MenuItem(MenuItemType.EXIT));
 

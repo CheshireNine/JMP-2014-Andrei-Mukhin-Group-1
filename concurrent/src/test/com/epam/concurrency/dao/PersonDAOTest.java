@@ -1,4 +1,4 @@
-package test.com.epam.concurrency.dao;
+package com.epam.concurrency.dao;
 
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.capture;

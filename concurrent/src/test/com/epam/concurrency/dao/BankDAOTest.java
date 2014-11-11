@@ -1,4 +1,4 @@
-package test.com.epam.concurrency.dao;
+package com.epam.concurrency.dao;
 
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.capture;
@@ -23,7 +23,7 @@ import com.epam.concurrency.model.Bank;
 import com.epam.concurrency.model.jaxb.Banks;
 import com.epam.concurrency.utils.JAXBFileManager;
 
-public class BankDAOText {
+public class BankDAOTest {
 
 	private JAXBFileManager fileManager;
 	private BankXMLDAO dao;

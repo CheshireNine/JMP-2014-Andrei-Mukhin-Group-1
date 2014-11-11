@@ -119,6 +119,6 @@ public class PersonXMLDAO implements IPersonDAO {
 	private List<Person> unmarshal() throws JAXBException {
 		Persons persons = ((Persons) fileManager
 				.unmarshal(Persons.class));
-		return persons.getPersons();
+		return (persons == null) ? new ArrayList<Person>() : persons.getPersons();
 	}
 }

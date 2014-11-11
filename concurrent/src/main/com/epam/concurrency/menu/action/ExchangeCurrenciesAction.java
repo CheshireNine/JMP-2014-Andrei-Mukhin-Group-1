@@ -48,9 +48,9 @@ public class ExchangeCurrenciesAction implements IMenuItemAction {
 		Currency selectedCurrency = currencies.get(currencyNum - 1);
 		long oldAmount = currentAccount.getAmount();
 		float oldRate = currentAccount.getCurrency().getRate();
-		int oldPrecision = currentAccount.getCurrency().getPrecision();
+		int oldPrecision = 10^currentAccount.getCurrency().getPrecision();
 		float newRate = selectedCurrency.getRate();
-		int newPrecision = selectedCurrency.getPrecision();
+		int newPrecision = 10^selectedCurrency.getPrecision();
 		long amount = Math.round((((oldAmount * oldRate) / oldPrecision) / newRate) * newPrecision);
 		currentAccount.setAmount(amount);
 		currentAccount.setCurrency(selectedCurrency);

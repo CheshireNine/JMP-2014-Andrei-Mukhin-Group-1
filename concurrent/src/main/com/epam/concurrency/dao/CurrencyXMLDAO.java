@@ -131,7 +131,7 @@ public class CurrencyXMLDAO implements ICurrencyDAO {
 
 		Currencies currencies = ((Currencies) fileManager
 				.unmarshal(Currencies.class));
-		return currencies.getCurrencies();
+		return (currencies == null) ? new ArrayList<Currency>() : currencies.getCurrencies();
 	}
 
 	public void setFileManager(JAXBFileManager fileManager) {
