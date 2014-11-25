@@ -1,0 +1,45 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.epam.banksystem</groupId>
+   <artifactId>banksystem-ejb</artifactId>
+   <packaging>ejb</packaging>
+   <version>1.0</version>
+   <name>enterprise java beans</name>
+   <parent>
+      <groupId>com.epam</groupId>
+      <artifactId>banksystem</artifactId>
+      <version>1.0</version>
+   </parent>
+   <dependencies>
+      <dependency>
+         <groupId>com.epam.banksystem</groupId>
+         <artifactId>primary-source</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.epam.banksystem.projects</groupId>
+         <artifactId>logging</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-api</artifactId>
+         <version>7.0</version>
+      </dependency>
+  </dependencies>
+   <build>
+      <sourceDirectory>src/main/resources</sourceDirectory>
+      <plugins>
+         <plugin>
+            <artifactId>maven-ejb-plugin</artifactId>
+            <version>2.4</version>
+            <configuration>
+               <ejbVersion>3.0</ejbVersion>
+               <archive>
+                  <manifest>
+                     <addClasspath>true</addClasspath>
+                  </manifest>
+               </archive> 
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+</project>
