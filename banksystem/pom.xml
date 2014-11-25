@@ -1,0 +1,62 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.epam</groupId>
+   <version>1.0</version>
+   <artifactId>banksystem</artifactId>
+   <packaging>pom</packaging>
+   <name>banksystem</name>
+   <modules>
+      <module>projects</module>
+      <module>primary-source</module>
+      <module>banksystem-web</module>
+      <module>banksystem-ejb</module>
+      <module>banksystem-ear</module>
+      <!-- <module>site</module> -->
+   </modules>
+   <build>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-site-plugin</artifactId>
+               <configuration>
+                  <unzipCommand>/usr/bin/unzip -o > err.txt</unzipCommand>
+               </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>com.epam.banksystem.projects</groupId>
+            <artifactId>logging</artifactId>
+            <version>1.0</version>
+         </dependency>
+         <dependency>
+            <groupId>com.epam.banksystem</groupId>
+            <artifactId>primary-source</artifactId>
+            <version>1.0</version>
+         </dependency>
+         <dependency>
+            <groupId>com.epam.banksystem.servlets</groupId>
+            <artifactId>banksystem-web</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+         </dependency>
+         <dependency>
+            <groupId>com.epam.banksystem</groupId>
+            <artifactId>banksystem-ejb</artifactId>
+            <version>1.0</version>
+            <type>ejb</type>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
+   <distributionManagement>
+      <site>
+         <id>site</id>
+         <name>project website</name>
+         <url>scp://local.company.com/websites/project.company.com/</url>
+      </site>
+   </distributionManagement>
+</project>

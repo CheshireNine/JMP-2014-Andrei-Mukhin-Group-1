@@ -1,0 +1,19 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.epam.banksystem.projects</groupId>
+   <artifactId>logging</artifactId>
+   <packaging>jar</packaging>
+   <name>logging</name>
+   <parent>
+      <groupId>com.epam.banksystem</groupId>
+      <artifactId>projects</artifactId>
+      <version>1.0</version>
+   </parent>
+   <dependencies>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.9</version>
+      </dependency>
+   </dependencies>
+</project>

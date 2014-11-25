@@ -1,0 +1,43 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.epam.banksystem</groupId>
+   <artifactId>primary-source</artifactId>
+   <packaging>jar</packaging>
+   <name>core project classes</name>
+   <parent>
+      <groupId>com.epam</groupId>
+      <artifactId>banksystem</artifactId>
+      <version>1.0</version>
+   </parent>
+   <dependencies>
+      <dependency>
+         <groupId>com.epam.banksystem.projects</groupId>
+         <artifactId>logging</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>servlet-api</artifactId>
+         <version>2.5</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
+   <build>
+      <sourceDirectory>src/main/resources</sourceDirectory>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+               <encoding>iso-8859-1</encoding>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+               <minmemory>128m</minmemory>
+               <maxmemory>512m</maxmemory>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+</project>
