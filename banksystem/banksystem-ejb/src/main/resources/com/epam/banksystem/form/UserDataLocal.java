@@ -19,9 +19,15 @@ public interface UserDataLocal {
 
     Person getCurrentPerson();
 
+
     void setCurrentPerson(Person currentPerson);
+
 
     Currency getCurrentCurrency();
 
     void setCurrentCurrency(Currency currentCurrency);
+    
+    Currency getTargetCurrency();
+    
+    void setTargetCurrency(Currency targetCurrency);
 }

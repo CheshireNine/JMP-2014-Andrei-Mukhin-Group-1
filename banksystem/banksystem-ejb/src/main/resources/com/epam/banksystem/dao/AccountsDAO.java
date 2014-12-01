@@ -11,6 +11,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 import com.epam.banksystem.model.Account;
+import com.epam.banksystem.model.Currency;
+import com.epam.banksystem.model.Person;
 
 
 /**
@@ -39,5 +41,17 @@ public class AccountsDAO extends AbstractFacade<Account> implements AccountsDAOL
                 .createQuery("from Account a where a.bank.bank_id = ?1")
                 .setParameter(1, bankId).getResultList();
         return getEntityManager().createQuery(cq).getResultList();
+    }
+    
+    public Account assignPerson(Account account, long personId) {
+        Person person = getEntityManager().find(Person.class, personId);
+        account.setOwner(person);
+        return edit(account);
+    }
+    
+    public Account assignCurrency(Account account, long currencyId) {
+        Currency currency = getEntityManager().find(Currency.class, currencyId);
+        account.setCurrency(currency);;
+        return edit(account);
     }
 }

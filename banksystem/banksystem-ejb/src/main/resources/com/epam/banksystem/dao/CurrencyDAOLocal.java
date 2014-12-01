@@ -13,4 +13,5 @@ public interface CurrencyDAOLocal {
     void remove(Currency currency);
     Currency find(Object id);
     List<Currency> findAll();
+    List<Currency> fetchByBankId(long bankId);
 }

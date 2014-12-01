@@ -35,32 +35,33 @@ public class ServiceLocator {
 
     // Services Constants Inner Class - service objects
     public enum Services {
-        SHOW_BANKS,
-        VIEW_BANK,
-        ADD_ACCOUNT,
-        EDIT_ACCOUNT
+        BANK,
+        ACCOUNT,
+        PERSON,
+        CURRENCY
     };
 
     // Project EJB related constants
     @SuppressWarnings("rawtypes")
     private static final Class  SERVICES_CLASS = ActionService.class;
     private static final String SERVICE_NAME_TEMPLATE = "global/banksystem-ear-1.0/banksystem-ejb-1.0/${1}!com.epam.banksystem.service.ActionService";
-    private static final String SHOW_BANKS_SERVICE_NAME = SERVICE_NAME_TEMPLATE.replace("${1}", "ShowBanksService");
-    private static final String BANK_VIEW_SERVICE_NAME = SERVICE_NAME_TEMPLATE.replace("${1}", "ViewBankService");
-    private static final String ACCOUNT_EDIT_SERVICE_NAME = SERVICE_NAME_TEMPLATE.replace("${1}", "EditAccountService");
-    private static final String ACCOUNT_ADD_SERVICE_NAME = SERVICE_NAME_TEMPLATE.replace("${1}", "AddAccountService");
+    private static final String BANK_SERVICE = SERVICE_NAME_TEMPLATE.replace("${1}", "BankService");
+    private static final String ACCOUNT_SERVICE = SERVICE_NAME_TEMPLATE.replace("${1}", "AccountService");
+    private static final String PERSON_SERVICE = SERVICE_NAME_TEMPLATE.replace("${1}", "PersonService");
+    private static final String CURRENCY_SERVICE = SERVICE_NAME_TEMPLATE.replace("${1}", "CurrencyService");
+
 
     // returns the JNDI name for the required service 
     static private String getServiceName(Services service){
         switch( service ) {
-        case SHOW_BANKS:
-            return SHOW_BANKS_SERVICE_NAME;
-        case VIEW_BANK:
-            return BANK_VIEW_SERVICE_NAME;
-        case EDIT_ACCOUNT:
-            return ACCOUNT_EDIT_SERVICE_NAME;
-        case ADD_ACCOUNT:
-            return ACCOUNT_ADD_SERVICE_NAME;
+        case BANK:
+            return BANK_SERVICE;
+        case ACCOUNT:
+            return ACCOUNT_SERVICE;
+        case PERSON:
+            return PERSON_SERVICE;
+        case CURRENCY:
+            return CURRENCY_SERVICE;
         }
         return null;
     }

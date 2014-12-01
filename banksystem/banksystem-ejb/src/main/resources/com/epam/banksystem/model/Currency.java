@@ -19,13 +19,15 @@ public class Currency implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="currency_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="`currency_id`")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long currencyId;
+    @Column(name="`rate`")
 	private float rate;
+    @Column(name="`precision`")
 	private int precision;
 	@ManyToOne(targetEntity = Bank.class)
-	@JoinColumn(name="bank_id")
+	@JoinColumn(name="`bank_id`")
 	private Bank bank;
 	private String name;
 

@@ -6,6 +6,7 @@
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="showSql" value="true"/>
+            <property name="show_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
         </properties>
 	</persistence-unit>

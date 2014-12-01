@@ -1,11 +1,14 @@
 package com.epam.banksystem.dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.epam.banksystem.model.Currency;
 
@@ -29,4 +32,10 @@ public class CurrencyDAO extends AbstractFacade<Currency> implements CurrencyDAO
         return entityManager;
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Currency> fetchByBankId(long bankId) {
+        Query query = entityManager.createQuery("select c from currency c where c.bank.bankId = :bankId", Currency.class);
+        query.setParameter("bankId", bankId);
+        return query.getResultList();
+    }
 }

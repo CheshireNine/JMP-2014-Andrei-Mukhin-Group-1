@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="${ pageContext.request.contextPath }/css/style.css" rel="stylesheet" type="text/css"/>
 <title>Bank's Internal System</title>
 </head>
 <body>
@@ -13,15 +14,15 @@
 		<table>
 			<tr>
 				<th>Name</th>
-				<th colspan="3"><a href="<%=request.getContextPath()%>/GeneralController?action=createBank">Create</a></th>
+				<th colspan="3"><a href="${ pageContext.request.contextPath }/GeneralController?service=bank&action=add" class="action">Create</a></th>
 			</tr>
 			<c:if test="${!empty banksList}">
 				<c:forEach items="${banksList}" var="bank">
 				<tr>
 					<td>${bank.name}</td>
-					<td><a href="<%=request.getContextPath()%>/GeneralController?action=viewBank&id=${bank.bankId}">View</a></td>
-					<td><a href="<%=request.getContextPath()%>/GeneralController?action=editBank&id=${bank.bankId}">Edit</a></td>
-					<td><a href="<%=request.getContextPath()%>/GeneralController?action=deleteBank&id=${bank.bankId}">Delete</a></td>
+					<td><a href="${ pageContext.request.contextPath }/GeneralController?service=bank&action=view&id=${bank.bankId}" class="action">View</a></td>
+					<td><a href="${ pageContext.request.contextPath }/GeneralController?service=bank&action=edit&id=${bank.bankId}" class="action">Edit</a></td>
+					<td><a href="${ pageContext.request.contextPath }/GeneralController?service=bank&action=delete&id=${bank.bankId}" class="action">Delete</a></td>
 				</tr>
 				</c:forEach>
 			</c:if>

@@ -22,17 +22,17 @@ public class RequestHandler {
 
     public RequestHandler() {
         serviceNames = new HashMap<String, Services>();
-        serviceNames.put(HandlerConstants.REQUEST_BANKS_PAGE, Services.SHOW_BANKS);
-        serviceNames.put(HandlerConstants.REQUEST_BANK_VIEW__PAGE, Services.VIEW_BANK);
-        serviceNames.put(HandlerConstants.REQUEST_ACCOUNT_EDIT_PAGE, Services.EDIT_ACCOUNT);
-        serviceNames.put(HandlerConstants.REQUEST_ACCOUNT_ADD_PAGE, Services.ADD_ACCOUNT);
+        serviceNames.put(HandlerConstants.BANK_SERVICE_NAME, Services.BANK);
+        serviceNames.put(HandlerConstants.ACCOUNT_SERVICE_NAME, Services.ACCOUNT);
+        serviceNames.put(HandlerConstants.PERSON_SERVICE_NAME, Services.PERSON);
+        serviceNames.put(HandlerConstants.CURRENCY_SERVICE_NAME, Services.CURRENCY);
     }
 
     public String handleRequest(HttpServletRequest request) throws NamingException {
         ServiceLocator locator = ServiceLocator.getInstance();
         String page;
-        String actionName = request.getParameter(HandlerConstants.PARAMETER_ACTION_NAME);
-        LOG.info("Action requested: " + actionName);
+        String actionName = request.getParameter(HandlerConstants.PARAMETER_SERVICE_NAME);
+        LOG.info("Service requested: " + actionName);
         ActionService service = locator.getService(serviceNames.get(actionName));
         page = service.execute(request);
         return page;
