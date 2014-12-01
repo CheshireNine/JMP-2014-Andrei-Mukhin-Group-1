@@ -8,6 +8,6 @@
 </head>
 <body>
 <!-- <a href="/GeneralController?action=banks">Go to banks</a> -->
-<jsp:forward page="/GeneralController?action=banks"/>
+<jsp:forward page="/GeneralController?service=bank&action=viewAll"/>
 </body>
 </html>

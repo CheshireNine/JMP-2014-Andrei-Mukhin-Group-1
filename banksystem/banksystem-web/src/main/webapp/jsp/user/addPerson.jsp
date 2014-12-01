@@ -9,9 +9,11 @@
 <title>Bank's Internal System</title>
 </head>
 <body>
-	<form action="${ pageContext.request.contextPath }/GeneralController?service=account&action=save" method="POST">
-		<p>Amount:</p>
-		<input type="text" name="amount" value=""/>
+	<form action="${ pageContext.request.contextPath }/GeneralController?service=person&action=save" method="POST">
+		<p>First name:</p>
+		<input type="text" name="firstName" value=""/>
+		<p>Last name:</p>
+		<input type="text" name="lastName" value=""/>
 		<input type="submit" value="Save"/>
 	</form>
 </body>

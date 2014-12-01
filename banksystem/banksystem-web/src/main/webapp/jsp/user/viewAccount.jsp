@@ -9,30 +9,30 @@
 <title>Bank's Internal System</title>
 </head>
 <body>
-<form action="${ pageContext.request.contextPath }/GeneralController?service=account&action=save" method="POST">
 <p>Amount:</p>
-<input type="text" name="amount" value="${userData.currentAccount.amount}"/>
+<p>${userData.currentAccount.amount}</p>
 <p>Owner:</p>
 <c:if test="${!empty userData.currentAccount.owner}">
-	<input type="text" value="${userData.currentAccount.owner.firstName} ${userData.currentAccount.owner.lastName}" disabled="disabled"/>
-	<input type="hidden" name="personId" value=""/>
+	<p>${userData.currentAccount.owner.firstName} ${userData.currentAccount.owner.lastName}"</p>
 </c:if>
 <c:if test="${empty userData.currentAccount.owner}">
 	<p>no owner</p>
 </c:if>
-<a href="${ pageContext.request.contextPath }/GeneralController?service=person&action=select" class="action">Select owner</a>
 <c:if test="${!empty userData.currentAccount.currency}">
-	<input type="text" value="${userData.currentAccount.currency.name}" disabled="disabled"/>
-	<input type="text" value="${userData.currentAccount.currency.rate}" disabled="disabled"/>
-	<input type="text" value="${userData.currentAccount.currency.precision}" disabled="disabled"/>
+	<p>${userData.currentAccount.currency.name}</p>
+	<p>${userData.currentAccount.currency.rate}</p>
+	<p>${userData.currentAccount.currency.precision}</p>
+	<c:if test="${empty userData.targetCurrency}">
+		<a href="${ pageContext.request.contextPath }/GeneralController?service=currency&action=select" class="action">Select currency for exchange</a>
+	</c:if>
+	<c:if test="${not empty userData.targetCurrency}">
+		<a href="${ pageContext.request.contextPath }/GeneralController?service=account&action=performExchange" class="action">Perform exchange</a>
+	</c:if>
 </c:if>
 
 <c:if test="${empty userData.currentAccount.currency}">
 	<p>no currency</p>
 </c:if>
-<a href="${ pageContext.request.contextPath }/GeneralController?service=currency&action=select" class="action">Select currency</a>
-<input type="submit" value="Save"/>
-</form>
 <a href="${ pageContext.request.contextPath }/GeneralController?service=account&action=viewAll" class="action">Back</a>
 </body>
 </html>

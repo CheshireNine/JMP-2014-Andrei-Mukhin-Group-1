@@ -19,24 +19,9 @@ public class UserData implements UserDataLocal {
     private Account currentAccount;
     private Person currentPerson;
     private Currency currentCurrency;
+    private Currency targetCurrency;
 
     public UserData() {
-    }
-
-    public Bank getCurrentBank() {
-        return currentBank;
-    }
-
-    public void setCurrentBank(Bank currentBank) {
-        this.currentBank = currentBank;
-    }
-
-    public Account getCurrentAccount() {
-        return currentAccount;
-    }
-
-    public void setCurrentAccount(Account currentAccount) {
-        this.currentAccount = currentAccount;
     }
 
     public Person getCurrentPerson() {
@@ -53,6 +38,30 @@ public class UserData implements UserDataLocal {
 
     public void setCurrentCurrency(Currency currentCurrency) {
         this.currentCurrency = currentCurrency;
+    }
+
+    public Currency getTargetCurrency() {
+        return targetCurrency;
+    }
+
+    public void setTargetCurrency(Currency targetCurrency) {
+        this.targetCurrency = targetCurrency;
+    }
+
+    public Bank getCurrentBank() {
+        return currentBank;
+    }
+
+    public void setCurrentBank(Bank currentBank) {
+        this.currentBank = currentBank;
+    }
+
+    public Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public void setCurrentAccount(Account currentAccount) {
+        this.currentAccount = currentAccount;
     }
 
 }

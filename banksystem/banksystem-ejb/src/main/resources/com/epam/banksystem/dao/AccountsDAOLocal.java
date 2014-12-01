@@ -13,5 +13,6 @@ public interface AccountsDAOLocal {
     void remove(Account account);
     Account find(Object id);
     List<Account> findAll();
-    List<Account> findAllByBankId(long bankId);
+    Account assignPerson(Account account, long personId);
+    Account assignCurrency(Account account, long currencyId);
 }

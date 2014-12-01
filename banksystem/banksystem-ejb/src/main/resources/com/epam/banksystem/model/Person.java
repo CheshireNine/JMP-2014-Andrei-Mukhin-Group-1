@@ -14,9 +14,12 @@ public class Person implements Serializable {
 
     @Id
     @Column(name="person_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long personId;
+
+    @Column(name="first_name")
 	private String firstName;
+    @Column(name="last_name")
 	private String lastName;
 
 	public Person() {
