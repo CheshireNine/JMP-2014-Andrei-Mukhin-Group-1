@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource
+        name="jdbc/EmployeeManagementDS" type="javax.sql.DataSource"
+        maxActive="100" maxIdle="30" maxWait="10000" 
+        url="jdbc:mysql://localhost:3306/employee_management"
+        driverClassName="com.mysql.jdbc.Driver"
+        username="i7eter" password="1"
+    />
+</Context>

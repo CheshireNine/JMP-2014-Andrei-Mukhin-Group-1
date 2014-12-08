@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0em;
+}
+
+body {
+	font-family: "Noto Sans",sans-serif;
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+td, th {
+	padding: 3px 5px;
+}
+a.action:hover, input[type=submit]:hover {
+	background: #eee;
+	color: #777;
+}
+a.action, input[type=submit] {
+	background: #ccc;
+	display: block;
+	min-width: 150px;
+	max-width: 480px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 25px;
+	color: #fff;
+	border: none;
+}
+
+input[type=submit] {
+	min-width: 480px;
+}
+
+select {
+	min-width: 173px;
+	height: 21px;
+}
