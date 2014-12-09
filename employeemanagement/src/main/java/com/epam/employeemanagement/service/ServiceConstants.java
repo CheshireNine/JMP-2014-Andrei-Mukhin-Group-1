@@ -4,6 +4,7 @@ public final class ServiceConstants {
 
     public final static String PARAMETER_ID_NAME = "id";
 
+    public final static String PARAMETER_NAME = "name";
     public final static String PARAMETER_FIRST_NAME = "firstName";
     public final static String PARAMETER_LAST_NAME = "lastName";
     public final static String PARAMETER_STATUS = "status";
@@ -31,7 +32,11 @@ public final class ServiceConstants {
     public final static String EMPLOYEE_FIND_RESULT_PAGE_PATH = "/jsp/user/findedEmployee.jsp";
     
     public final static String PROJECT_SELECT_PAGE_PATH = "/jsp/user/selectProject.jsp";
+    public final static String PROJECT_ADD_PAGE_PATH = "/jsp/user/addProject.jsp";
+
     public final static String UNIT_SELECT_PAGE_PATH = "/jsp/user/selectUnit.jsp";
+    public final static String UNIT_ADD_PAGE_PATH = "/jsp/user/addUnit.jsp";
+
     public final static String PERSONAL_EDIT_PAGE_PATH = "/jsp/user/editPersonal.jsp";
 
     public final static String BEAN_USER_DATA_NAME = "userData";
