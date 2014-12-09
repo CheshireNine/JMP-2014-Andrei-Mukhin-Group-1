@@ -55,6 +55,10 @@
     <bean id="performEditPersonalService" class="com.epam.employeemanagement.service.PerformEditPersonalService"/>
     <bean id="findEmployeeService" class="com.epam.employeemanagement.service.FindEmployeeService"/>
     <bean id="performFindEmployeeService" class="com.epam.employeemanagement.service.PerformFindEmployeeService"/>
+    <bean id="addProjectService" class="com.epam.employeemanagement.service.AddProjectService"/>
+    <bean id="addUnitService" class="com.epam.employeemanagement.service.AddUnitService"/>
+    <bean id="saveProjectService" class="com.epam.employeemanagement.service.SaveProjectService"/>
+    <bean id="saveUnitService" class="com.epam.employeemanagement.service.SaveUnitService"/>
 
 	<bean class="com.epam.employeemanagement.requesthandler.RequestHandler">
         <property name="services">
@@ -76,6 +80,10 @@
                 <entry key="performEditPersonal" value-ref="performEditPersonalService"/>
                 <entry key="findEmployee" value-ref="findEmployeeService"/>
                 <entry key="performFindEmployee" value-ref="performFindEmployeeService"/>
+                <entry key="addProject" value-ref="addProjectService"/>
+                <entry key="addUnit" value-ref="addUnitService"/>
+                <entry key="saveProject" value-ref="saveProjectService"/>
+                <entry key="saveUnit" value-ref="saveUnitService"/>
             </map>
         </property>
     </bean>

@@ -16,7 +16,7 @@
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
-				<th colspan="3"><a href="${ pageContext.request.contextPath }/GeneralController?action=addEmployee" class="action">Create</a></th>
+				<th colspan="3"><a href="${ pageContext.request.contextPath }/GeneralController?action=addUnit" class="action">Create</a></th>
 			</tr>
 			<c:if test="${!empty unitList}">
 				<c:forEach items="${unitList}" var="unit">

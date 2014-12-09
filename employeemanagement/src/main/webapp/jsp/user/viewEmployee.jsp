@@ -31,7 +31,7 @@
 		</c:forEach>
 	</c:if>
 	
-	<c:if test="${not empty userData.currentEmployee.projects}">
+	<c:if test="${empty userData.currentEmployee.projects}">
 		<br><c:out value="No projects"/>
 	</c:if>
 
