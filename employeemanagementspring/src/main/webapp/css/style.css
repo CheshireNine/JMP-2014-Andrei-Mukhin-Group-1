@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0em;
+}
+
+body {
+	font-family: "Noto Sans",sans-serif;
+	font-size: 17px;
+	line-height: 1.5;
+	background-color:#DFDFDF;
+}
+
+/*td, th {
+	padding: 3px 5px;
+}*/
+
+select {
+	min-width: 173px;
+	height: 21px;
+}
+
+.footer {
+	border-top: 1px solid #eee;
+	height: 10%;
+	background: #fff;
+}
+
+.copyright {
+	margin-top:13px;
+	text-align:center;
+}
+
+.section-end {
+	border-bottom: 1px solid #eee;
+	margin: 20px 0;
+	padding-bottom: 20px;
+}
+
+.container {
+	background: #fff;
+	width: 100%;
+	min-height: 90%;
+	padding-bottom: 20px;
+}
+
+.stretch {
+	width: 100%;
+}

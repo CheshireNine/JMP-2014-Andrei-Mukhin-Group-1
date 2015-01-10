@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="DefaultTemplate" template="/jsp/template/default/template.jsp">
+		<put-attribute name="title" value="Employee Management Spring MVC" />
+		<put-attribute name="header" value="/jsp/template/default/header.jsp" />
+		<put-attribute name="menu" value="/jsp/template/default/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/jsp/template/default/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/index.jsp" />
+	</definition>
+
+	<definition name="employees" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/employees.jsp" />
+	</definition>
+
+	<definition name="projects" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/projects.jsp" />
+	</definition>
+
+	<definition name="units" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/units.jsp" />
+	</definition>
+
+	<definition name="addEmployee" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/addEmployee.jsp" />
+	</definition>
+
+	<definition name="addProject" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/addProject.jsp" />
+	</definition>
+
+	<definition name="addProject" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/addProject.jsp" />
+	</definition>
+
+	<definition name="addUnit" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/addUnit.jsp" />
+	</definition>
+
+	<definition name="editEmployee" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/editEmployee.jsp" />
+	</definition>
+
+	<definition name="editPersonal" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/editPersonal.jsp" />
+	</definition>
+
+	<definition name="findedEmployee" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/findedEmployee.jsp" />
+	</definition>
+
+	<definition name="findEmployee" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/findEmployee.jsp" />
+	</definition>
+
+	<definition name="selectProject" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/selectProject.jsp" />
+	</definition>
+
+	<definition name="selectUnit" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/selectUnit.jsp" />
+	</definition>
+
+	<definition name="viewEmployee" extends="DefaultTemplate">
+		<put-attribute name="body"	
+			value="/jsp/user/viewEmployee.jsp" />
+	</definition>
+
+</tiles-definitions>
