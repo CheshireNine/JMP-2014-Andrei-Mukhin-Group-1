@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "project")
@@ -24,6 +26,8 @@ public class Project  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectId;
 
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "name", nullable = true, length = 20)
     private String name;
 

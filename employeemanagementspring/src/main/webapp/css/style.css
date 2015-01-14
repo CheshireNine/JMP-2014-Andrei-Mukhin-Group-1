@@ -47,3 +47,7 @@ select {
 .stretch {
 	width: 100%;
 }
+
+.alert-danger {
+	margin-top: 15px;
+}

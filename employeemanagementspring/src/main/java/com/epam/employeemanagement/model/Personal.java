@@ -20,7 +20,7 @@ public class Personal {
 
     @Column(name = "phone_number", nullable = true, length = 20)
     private String phoneNumber;
- 
+
     @Column(name = "email", nullable = true, length = 20)
     private String email;
 
