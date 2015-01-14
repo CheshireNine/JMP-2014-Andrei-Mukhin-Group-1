@@ -35,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @PostConstruct
     public void initEmployeeSort() {
-        sort = new Sort(Sort.Direction.valueOf(direction), "name");
+        sort = new Sort(Sort.Direction.valueOf(direction), ServiceConstants.DIRECTION_NAME);
     }
 
     public List<Project> list(int pageNum) {

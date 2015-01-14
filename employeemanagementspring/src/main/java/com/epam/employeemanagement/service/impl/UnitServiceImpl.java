@@ -35,7 +35,7 @@ public class UnitServiceImpl implements UnitService {
 
     @PostConstruct
     public void initEmployeeSort() {
-        sort = new Sort(Sort.Direction.valueOf(direction), "name");
+        sort = new Sort(Sort.Direction.valueOf(direction), ServiceConstants.DIRECTION_NAME);
     }
 
     public List<Unit> list(int pageNum) {

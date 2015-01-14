@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "unit")
@@ -22,6 +24,8 @@ public class Unit implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long unitId;
 
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "name", nullable = true, length = 20)
     private String name;
 

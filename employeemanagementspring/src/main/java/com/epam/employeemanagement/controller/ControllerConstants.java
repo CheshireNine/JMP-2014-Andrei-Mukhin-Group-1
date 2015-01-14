@@ -1,14 +1,15 @@
-package com.epam.employeemanagement.service;
+package com.epam.employeemanagement.controller;
 
-public final class ServiceConstants {
+public final class ControllerConstants {
 
     public final static String PARAMETER_PROJECT_ID_NAME = "projectId";
-    public final static String PARAMETER_UNIT_ID_NAME = "projectId";
+    public final static String PARAMETER_UNIT_ID_NAME = "unitId";
 
     public final static String ATTRIBUTE_EMPLOYEE_LIST_NAME = "employeeList";
     public final static String ATTRIBUTE_EMPLOYEE_NAME = "currentEmployee";
     public final static String ATTRIBUTE_PROJECT_NAME = "currentProject";
     public final static String ATTRIBUTE_UNIT_NAME = "currentUnit";
+    public final static String ATTRIBUTE_PERSONAL_INFO_NAME = "personal";
 
     public final static String ATTRIBUTE_PROJECT_LIST_NAME = "projectList";
     public final static String ATTRIBUTE_ADDED_PROJECTS_NAME = "addedProjectList";
@@ -17,12 +18,13 @@ public final class ServiceConstants {
     public final static String ATTRIBUTE_PAGES_COUNT_NAME = "pagesCount";
     public final static String ATTRIBUTE_PAGE_NUMBER_NAME = "page";
     public final static String ATTRIBUTE_SEARCH_VALUE_NAME = "searchValue";
-    
+
     public final static String REDIRECT_NAME = "redirect:";
     public final static String FORWARD_NAME = "forward:";
 
     public final static String EMPLOYEES_PAGE_REST_MAPPING = "/employee?page=1";
     public final static String EMPLOYEE_EDIT_PAGE_REST_MAPPING = "/employee/";
+    public final static String EMPLOYEES_ADD_PAGE_REST_MAPPING = "/employee/add";
 
     public final static String PROJECTS_PAGE_REST_MAPPING = "/project?page=1";
     public final static String UNITS_PAGE_REST_MAPPING = "/unit?page=1";
@@ -46,7 +48,7 @@ public final class ServiceConstants {
 
     public final static String PERSONAL_EDIT_PAGE_PATH = "editPersonal";
 
-    private ServiceConstants() {
+    private ControllerConstants() {
     }
 
 }

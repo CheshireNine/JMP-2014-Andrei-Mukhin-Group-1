@@ -41,9 +41,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @PostConstruct
     public void initEmployeeSort() {
-        sort = new Sort(Sort.Direction.valueOf(direction), "lastName");
+        sort = new Sort(Sort.Direction.valueOf(direction), ServiceConstants.DIRECTION_LAST_NAME);
     }
-
 
     public int getPageSize() {
         return pageSize;
@@ -81,15 +80,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> findByName(String name, int pageNum) {
-        String nameForLikeOperator = "%" + name + "%";
         Pageable pageable = new PageRequest(pageNum, pageSize, sort);
-        return employeeDAO.findAllByLastNameLike(nameForLikeOperator, pageable);
+        return employeeDAO.findByNameLike(name, pageable);
     }
 
     @Override
     public long countByName(String name) {
-        String nameForLikeOperator = "%" + name + "%";
-        return employeeDAO.countByLastNameLike(nameForLikeOperator);
+        return employeeDAO.countByNameLike(name);
     }
 
     @Override
