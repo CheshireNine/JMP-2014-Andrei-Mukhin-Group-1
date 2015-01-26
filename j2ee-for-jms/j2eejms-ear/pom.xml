@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.epam.j2eejms</groupId>
+   <artifactId>j2eejms-ear</artifactId>
+   <packaging>ear</packaging>
+   <name>ear assembly</name>
+   <parent>
+      <groupId>com.epam</groupId>
+      <artifactId>j2eejms</artifactId>
+      <version>1.0</version>
+   </parent>
+   <dependencies>
+      <dependency>
+         <groupId>com.epam.j2eejms</groupId>
+         <artifactId>j2eejms-ejb</artifactId>
+         <type>ejb</type>
+         <version>1.0</version>
+      </dependency>
+      <dependency>
+         <groupId>com.epam.j2eejms</groupId>
+         <artifactId>j2eejms-primary-source</artifactId>
+         <version>1.0</version>
+      </dependency>
+      <!-- <dependency>
+         <groupId>com.epam.j2eejms</groupId>
+         <artifactId>j2eejms-logging</artifactId>
+         <version>1.0</version>
+      </dependency> -->
+   </dependencies>
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-ear-plugin</artifactId>
+            <configuration>
+              <applicationName>JMS Integration system</applicationName>
+              <modules>
+                <jarModule>
+                  <groupId>com.epam.j2eejms</groupId>
+                  <artifactId>j2eejms-logging</artifactId>
+                  <includeInApplicationXml>true</includeInApplicationXml>
+                </jarModule>
+                <ejbModule>
+                  <groupId>com.epam.j2eejms</groupId>
+                  <artifactId>j2eejms-ejb</artifactId>
+                </ejbModule>
+              </modules>
+               <!-- <archive>
+                  <manifest>
+                     <addClasspath>true</addClasspath>
+                  </manifest>
+               </archive> -->
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+</project>
