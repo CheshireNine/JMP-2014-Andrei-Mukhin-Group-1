@@ -1,0 +1,35 @@
+<div class="panel-body">
+    <br><br>
+    <div class="col-md-12">
+        <div class="col-md-4">Film name:</div>
+        <div class="col-md-4">{{film.name}}</div>
+    </div>    
+
+    <br><br>
+    <div class="col-md-12">
+        <div class="col-md-4">Short description: </div>
+        <div class="col-md-4">{{film.description}}</div>
+    </div>
+
+    <br><br>
+    <ul class="sessions">
+        <li class="col-md-12 header">
+            <div class="col-md-2"><span>Hall</span></div>
+            <div class="col-md-2"><span>Time</span></div>
+            <div class="col-md-2"><span>Seats available</span></div>
+            <div class="col-md-2"><span>Available for booking</span></div>
+            <div class="col-md-4"><span>Action</span></div>
+        </li>
+        <li ng-repeat="session in film.sessions | filter:query | orderBy:orderProp" class="col-md-12">
+            <div class="col-md-2"><span>{{session.hall.name}}</span></div>
+            <div class="col-md-2"><span>{{session.time | date:'dd-M-yyyy H:mm'}}</span></div>
+            <div class="col-md-2"><span>{{session.hall.seatsNumber - session.reservedSeats - session.bookedSeats}}</span></div>
+            <div class="col-md-2">
+                <span ng-if="session.hall.bookingSeatsNumber - session.reservedSeats > session.bookedSeats">{{session.hall.bookingSeatsNumber - session.bookedSeats}}</span>
+                <span ng-if="session.hall.bookingSeatsNumber - session.reservedSeats <= session.bookedSeats">0</span>
+            </div>
+            <div class="col-md-4"><a href="#/ticket/{{session.id}}" class="btn btn-default">Get ticket</a></div>
+        </li>
+
+    </ul>
+</div>
