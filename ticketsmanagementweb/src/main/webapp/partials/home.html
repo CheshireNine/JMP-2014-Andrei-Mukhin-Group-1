@@ -1,0 +1,13 @@
+<div class="panel-body">
+    <ul class="films">
+        <li class="col-md-12 header">
+            <div class="col-md-2"><span>Film</span></div>
+            <div class="col-md-4"><span>Action</span></div>
+        </li>
+        <li ng-repeat="film in films | filter:query | orderBy:orderProp" class="col-md-12">
+            <div class="col-md-2"><span>{{film.name}}</span></div>
+            <div class="col-md-4"><a href="#/film/{{film.id}}" class="btn btn-default">View</a></div>
+        </li>
+
+    </ul>
+</div>

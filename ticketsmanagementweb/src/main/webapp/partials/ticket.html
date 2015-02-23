@@ -1,0 +1,45 @@
+<form ng-submit="createTicket()">
+    <br><br>
+    <div class="col-md-12">Create a new ticket:</div>
+    <p>
+        <input type="hidden" ng-value="sessionId" />
+    </p>
+    <br><br>
+    <div class="col-md-12">
+        <div class="col-md-4">Place:</div>
+        <div class="col-md-4"><input ng-model="place" /></div>
+    </div>
+
+    <br><br>
+    <div class="col-md-12">
+        <div class="col-md-4">Type:</div>
+        <div class="col-md-4">
+            <select ng-model="type">
+                <option value="BOOKED">book</option>
+                <option value="RESERVED" ng-model="selected">reserve</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-12 section-end">
+        <input type="submit" class="btn btn-default" />
+    </div>
+    
+    <p ng-show="newTicketId" class="col-md-8 alert alert-info" >
+        Ticket created with id: {{newTicketId}}
+    </p>
+    <p ng-if="!newTicketId" ng-show="errorMessage" class="col-md-8 alert alert-danger" >
+        {{errorMessage}}
+    </p>
+</form>
+
+<hr />
+
+<div>
+    <div class="col-md-12">Find a ticket by id:</div>
+    <form ng-submit="searchTicket()">
+        <input ng-model="searchTicketId" class="col-md-4" />
+    </form>
+
+    <div class="searchOutput" class="col-md-8 alert alert-info" >{{ticket | json}}</div>
+</div>
